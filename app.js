@@ -28,7 +28,9 @@ var module = (function ($) {
         if (!currentQuestion) {
             throw new Error;
         }
-        answers[currentQuestion.type]++;
+        if (isOptionA === currentQuestion.optionAScores) {
+            answers[currentQuestion.type]++;
+        }
         if (questions.length > 0) {
             nextQuestion();
         } else {
@@ -36,13 +38,13 @@ var module = (function ($) {
         }
     };
 
-    function showResult(answers) {
+    var showResult = function (answers) {
         $('#questionPanel').hide().after(
             $('#resultTemplate').render(
-                getResult()
+                getResult(answers)
             )
         );
-    }
+    };
 
     var questions = [
         question('Проект, за который вы отвечали, оказался весьма успешным', 'Я внимательно следил за работой каждого', 'Все отдавали ему много времени и сил', true, 'PsG'),
@@ -101,7 +103,7 @@ var module = (function ($) {
         buttons.optionA.text(currentQuestion.optionA);
         buttons.optionB.text(currentQuestion.optionB);
     };
-    var getResult = function () {
+    var getResult = function (answers) {
         var a = answers;
         result = {
             PsG: a.PsG,
@@ -120,7 +122,8 @@ var module = (function ($) {
     };
     return {
         nextQuestion: nextQuestion,
-        answer: answer
+        answer: answer,
+        showResult: showResult
     };
 })(jQuery);
 (function ($) {
@@ -130,5 +133,18 @@ var module = (function ($) {
     $('#startTest').click(function () {
         $('#questionPanel').show();
         $('#instructions').hide();
+        $('#requestResult').hide();
+    });
+    $('#requestResultForm').submit(function (e) {
+        e.preventDefault();
+        try {
+            var answers = JSON.parse(e.target.jsonData.value);
+        } catch (e) {
+            alert('Неверный формат данных!');
+            return;
+        }
+        module.showResult(answers);
+        $('#instructions').hide();
+        $('#requestResult').hide();
     });
 })(jQuery);
