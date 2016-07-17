@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Тест на оптимизм</title>
+    <link rel="stylesheet" href="build/all.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Тест на оптимизм</h1>
+    <div id="instructions" class="panel panel-default">
+        <div class="panel-heading">Инструкция</div>
+        <div class="panel-body">
+            Для ответа на каждый из вопросов вы можете затратить столько
+            времени, сколько хотите. В среднем на тест обычно требуется около
+            пятнадцати минут. Среди ответов нет правильных и неправильных.
+            Прочитайте описание каждой ситуации и постарайтесь наглядно
+            представить, что все это происходит с вами. Может быть, вы не попадали в
+            некоторые из описанных ситуаций, но это не имеет значения. Может
+            случиться так, что, с вашей точки зрения, ни один из ответов не подходит
+            точно; тогда постарайтесь выбрать тот из них, который
+            вам кажется наиболее подходящим.
+            <button class="btn btn-default btn-block" id="startTest">Начать тест</button>
+        </div>
+    </div>
+    <div id="questionPanel" class="panel panel-default" style="display: none;">
+        <div class="panel-body">
+            <h4 id="questionTitle" style="display: inline-block; height: 100px;"></h4>
+            <button class="btn btn-block" style="white-space: normal;" id="optionA" onclick="module.answer(true)"></button>
+            <br>
+            <button class="btn btn-block" style="white-space: normal;" id="optionB" onclick="module.answer(false)"></button>
+        </div>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script id="resultTemplate" type="text/x-jsrender">
+ <div class="panel panel-default">
+        <div class="panel-heading">Результаты</div>
+        <div class="panel-body">
+        <form>
+            <div class="form-group">
+                <label>Скопируйте эти данные</label>
+                <textarea class="form-control">{{:json}}</textarea>
+            </div>
+            </form>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">PmB: {{:PmB}}</h4>
+                    <p class="list-group-item-text">«Permanent bad» - постоянство плохих событий</p>
+                </li>
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">PmG: {{:PmG}}</h4>
+                    <p class="list-group-item-text">«Permanent good» - постоянство хороших событий</p>
+                </li>
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">PsB: {{:PsB}}</h4>
+                    <p class="list-group-item-text">«Рersonalization bad» - персонализация плохого</p>
+                </li>
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">PsG: {{:PmG}}</h4>
+                    <p class="list-group-item-text">«Personalization good» - персонализация хорошего</p>
+                </li>
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">PvB: {{:PvB}}</h4>
+                    <p class="list-group-item-text">«Pervasivness bad» - пространственное распространение плохих событий</p>
+                </li>
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">PvG: {{:PvG}}</h4>
+                    <p class="list-group-item-text">«Pervesivness good» - пространственное распространение хороших событий</p>
+                </li>
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">HoB: {{:HoB}}</h4>
+                    <p class="list-group-item-text">«Hope bad» - коэффициент надежды<br>
+                        0, 1, или 2 - вы преисполнены надежд<br>
+                        3, 4, 5, 6 - умеренные надежды<br>
+                        7 или 8 - промежуточная ситуация<br>
+                        9, 10, 11 - вы умеренно безнадежны<br>
+                        12-16 - вы абсолютно безнадежны<br>
+                    </p>
+                </li>
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">G: {{:G}}</h4>
+                    <p class="list-group-item-text">Итог по благоприятным событиям<br>
+                        19 и больше – вы относитесь к хорошим событиям весьма оптимистично<br>
+                        17 – 19 - ваше мышление умеренно оптимистично<br>
+                        14 – 16 - промежуточные значения<br>
+                        11 – 13 - вы рассуждаете вполне оптимистично<br>
+                        10 и меньше – глубокий пессимизм<br>
+                    </p>
+                </li>
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">B: {{:B}}</h4>
+                    <p class="list-group-item-text">Итог по неблагоприятным событиям<br>
+                        3 – 6 - вы замечательно оптимистичны<br>
+                        6 – 9 - вы умеренно оптимистичны<br>
+                        10 или 11 - промежуточные значения<br>
+                        12 – 14- умеренно пессимистичны<br>
+                        любое значение, превышающее 14, требует обязательной корректировки
+                    </p>
+                </li>
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">G-M: {{:GmB}}</h4>
+                    <p class="list-group-item-text">Окончательный итог<br>
+                        Больше 8 - вы весьма оптимистичны в широком диапазоне условий<br>
+                        8 – 6 - вы умеренно оптимистичны<br>
+                        5 – 3 - промежуточные значения<br>
+                        2 – 1 - умеренно пессимистичны<br>
+                        0 и меньше – вы весьма пессимистичны<br>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</script>
+<script src="build/all.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
