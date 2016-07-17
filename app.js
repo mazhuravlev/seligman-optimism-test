@@ -102,7 +102,14 @@ var module = (function ($) {
         questionTitle.text(currentQuestion.title);
         buttons.optionA.text(currentQuestion.optionA);
         buttons.optionB.text(currentQuestion.optionB);
+        shuffleChildren(buttons.optionA.parent());
     };
+    function shuffleChildren(parent) {
+        var divs = parent.children();
+        while (divs.length) {
+            parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+        }
+    }
     var getResult = function (answers) {
         var a = answers;
         result = {
