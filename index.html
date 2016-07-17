@@ -62,8 +62,8 @@
             </form>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <h4 class="list-group-item-heading">PmB: {{:PmB}}</h4>
-                    <p class="list-group-item-text">«Permanent bad» - постоянство плохих событий<br>
+                    <h4 class="list-group-item-heading">Постоянство плохих событий</h4>
+                    <p class="list-group-item-text">
                         {{if PmB < 2}}
                             Вы весьма оптимистичны по этому параметру
                         {{else PmB < 4}}
@@ -78,8 +78,8 @@
                     </p>
                 </li>
                 <li class="list-group-item">
-                    <h4 class="list-group-item-heading">PmG: {{:PmG}}</h4>
-                    <p class="list-group-item-text">«Permanent good» - постоянство хороших событий<br>
+                    <h4 class="list-group-item-heading">Постоянство хороших событий</h4>
+                    <p class="list-group-item-text">
                         {{if PmG > 6}}
                             Вы очень оптимистично настроены относительно возможности того, что хорошие события будут продолжаться
                         {{else PmG > 5}}
@@ -92,8 +92,8 @@
                     </p>
                 </li>
                 <li class="list-group-item">
-                    <h4 class="list-group-item-heading">PsB: {{:PsB}}</h4>
-                    <p class="list-group-item-text">«Рersonalization bad» - персонализация плохого<br>
+                    <h4 class="list-group-item-heading">Персонализация плохого</h4>
+                    <p class="list-group-item-text">
                         {{if PsB < 2}}
                             Указывает на очень высокую самооценку
                         {{else PsB < 4}}
@@ -108,8 +108,8 @@
                     </p>
                 </li>
                 <li class="list-group-item">
-                    <h4 class="list-group-item-heading">PsG: {{:PmG}}</h4>
-                    <p class="list-group-item-text">«Personalization good» - персонализация хорошего<br>
+                    <h4 class="list-group-item-heading">Персонализация хорошего</h4>
+                    <p class="list-group-item-text">
                         {{if PmG > 6}}
                             Очень оптимистичная оценка
                         {{else PmG > 5}}
@@ -124,8 +124,8 @@
                     </p>
                 </li>
                 <li class="list-group-item">
-                    <h4 class="list-group-item-heading">PvB: {{:PvB}}</h4>
-                    <p class="list-group-item-text">«Pervasivness bad» - пространственное распространение плохих событий<br>
+                    <h4 class="list-group-item-heading">Пространственное распространение плохих событий</h4>
+                    <p class="list-group-item-text">
                         {{if PvB < 2}}
                             Очень оптимистично
                         {{else PvB < 4}}
@@ -140,8 +140,8 @@
                     </p>
                 </li>
                 <li class="list-group-item">
-                    <h4 class="list-group-item-heading">PvG: {{:PvG}}</h4>
-                    <p class="list-group-item-text">«Pervesivness good» - пространственное распространение хороших событий<br>
+                    <h4 class="list-group-item-heading">Пространственное распространение хороших событий</h4>
+                    <p class="list-group-item-text">
                         {{if PvG > 6}}
                             Весьма оптимистично
                         {{else PvG > 4}}
@@ -156,8 +156,8 @@
                     </p>
                 </li>
                 <li class="list-group-item">
-                    <h4 class="list-group-item-heading">HoB: {{:HoB}}</h4>
-                    <p class="list-group-item-text">«Hope bad» - коэффициент надежды<br>
+                    <h4 class="list-group-item-heading">Коэффициент надежды</h4>
+                    <p class="list-group-item-text">
                         {{if HoB < 3}}
                             Вы преисполнены надежд
                         {{else HoB < 7}}
@@ -172,8 +172,8 @@
                     </p>
                 </li>
                 <li class="list-group-item">
-                    <h4 class="list-group-item-heading">G: {{:G}}</h4>
-                    <p class="list-group-item-text">Итог по благоприятным событиям<br>
+                    <h4 class="list-group-item-heading">Итог по благоприятным событиям</h4>
+                    <p class="list-group-item-text">
                         {{if G > 17}}
                             Вы относитесь к хорошим событиям весьма оптимистично
                         {{else G > 16}}
@@ -188,8 +188,8 @@
                     </p>
                 </li>
                 <li class="list-group-item">
-                    <h4 class="list-group-item-heading">B: {{:B}}</h4>
-                    <p class="list-group-item-text">Итог по неблагоприятным событиям<br>
+                    <h4 class="list-group-item-heading">Итог по неблагоприятным событиям</h4>
+                    <p class="list-group-item-text">
                         {{if B < 6}}
                             Вы замечательно оптимистичны
                         {{else B < 10}}
@@ -200,15 +200,15 @@
                             Умеренно пессимистичны
                         {{/if}}
                         {{if B > 14}}
-                            <p>Любое значение, превышающее 14, требует обязательной корректировки</p>
+                            <p><strong>Результат требует обязательной корректировки</strong></p>
                         {{else}}
                             <span></span>
                         {{/if}}
                     </p>
                 </li>
                 <li class="list-group-item active">
-                    <h4 class="list-group-item-heading">G-M: {{:GmB}}</h4>
-                    <p class="list-group-item-text">Окончательный итог<br>
+                    <h4 class="list-group-item-heading">Окончательный итог</h4>
+                    <p class="list-group-item-text">
                         {{if GmB > 8}}
                             Вы весьма оптимистичны в широком диапазоне условий
                         {{else GmB > 5}}
